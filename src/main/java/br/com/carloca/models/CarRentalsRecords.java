@@ -1,12 +1,10 @@
 package br.com.carloca.models;
 
-import br.com.carloca.enums.CarColors;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "rents_records")
-public class RentsRecords {
+public class CarRentalsRecords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,9 +15,9 @@ public class RentsRecords {
     @ManyToOne
     private WithdrawalSpecifications withdrawalSpecifications;
     @ManyToOne
-    private ReturnSpecifications returnSpecifications;
+    private CarReturnSpecifications carReturnSpecifications;
 
-    public RentsRecords(Car car, Costumer costumer, WithdrawalSpecifications withdrawalSpecifications) {
+    public CarRentalsRecords(Car car, Costumer costumer, WithdrawalSpecifications withdrawalSpecifications) {
         this.car = car;
         this.costumer = costumer;
         this.withdrawalSpecifications = withdrawalSpecifications;
@@ -57,11 +55,11 @@ public class RentsRecords {
         this.withdrawalSpecifications = withdrawalSpecifications;
     }
 
-    public ReturnSpecifications getReturnSpecifications() {
-        return returnSpecifications;
+    public CarReturnSpecifications getReturnSpecifications() {
+        return carReturnSpecifications;
     }
 
-    public void setReturnSpecifications(ReturnSpecifications returnSpecifications) {
-        this.returnSpecifications = returnSpecifications;
+    public void setReturnSpecifications(CarReturnSpecifications carReturnSpecifications) {
+        this.carReturnSpecifications = carReturnSpecifications;
     }
 }

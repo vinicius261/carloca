@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "return_specifications")
-public class ReturnSpecifications {
+public class CarReturnSpecifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,7 +15,7 @@ public class ReturnSpecifications {
     @ManyToOne
     private FranchiseUnit franchiseUnit;
 
-    public ReturnSpecifications(Date date, Double odometerRegistration, FranchiseUnit franchiseUnit) {
+    public CarReturnSpecifications(Date date, Double odometerRegistration, FranchiseUnit franchiseUnit) {
         this.date = date;
         this.odometerRegistration = odometerRegistration;
         this.franchiseUnit = franchiseUnit;

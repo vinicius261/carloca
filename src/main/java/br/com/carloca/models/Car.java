@@ -27,4 +27,51 @@ public class Car {
         this.odometer = odometer;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CarVersion getCarVersion() {
+        return carVersion;
+    }
+
+    public void setCarVersion(CarVersion carVersion) {
+        this.carVersion = carVersion;
+    }
+
+    public CarColors getCarColor() {
+        return carColor;
+    }
+
+    public void setCarColor(CarColors carColor) {
+        this.carColor = carColor;
+    }
+
+    public boolean isInUSe() {
+        return inUSe;
+    }
+
+    public void setInUSe(boolean inUSe) {
+        this.inUSe = inUSe;
+    }
+
+    public Integer getOdometer() {
+        return odometer;
+    }
+
+    public void setOdometer(Integer odometer) {
+        this.odometer = odometer;
+    }
 }
