@@ -3,7 +3,7 @@ package br.com.carloca.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "car_model")
+@Table(name = "car_models")
 public class CarModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

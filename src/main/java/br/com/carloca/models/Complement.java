@@ -3,11 +3,24 @@ package br.com.carloca.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "complement")
+@Table(name = "complements")
 public class Complement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String complement;
+
+    public Complement(String complement){
+        this.complement = complement;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
 
     public int getId() {
         return id;

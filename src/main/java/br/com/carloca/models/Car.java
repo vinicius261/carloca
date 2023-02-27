@@ -5,12 +5,13 @@ import br.com.carloca.enums.CarColors;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    @Column(name = "license_plate")
+    private String licensePlate;
     @ManyToOne
     private CarVersion carVersion;
     @Column(name = "car_color")
@@ -19,8 +20,8 @@ public class Car {
     private boolean inUSe;
     private Integer odometer;
 
-    public Car(String name, CarVersion carVersion, CarColors carColor, boolean inUSe, Integer odometer) {
-        this.name = name;
+    public Car(String licensePlate, CarVersion carVersion, CarColors carColor, boolean inUSe, Integer odometer) {
+        this.licensePlate = licensePlate;
         this.carVersion = carVersion;
         this.carColor = carColor;
         this.inUSe = inUSe;
@@ -35,12 +36,12 @@ public class Car {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     public CarVersion getCarVersion() {

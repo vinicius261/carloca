@@ -15,8 +15,8 @@ public class ZipcodeDao {
         this.util = new Util();
     }
 
-    public Zipcode createZipcode() {
-        Zipcode zipcode = new Zipcode();
+    public Zipcode createZipcode(String inputZipcode) {
+        Zipcode zipcode = new Zipcode(inputZipcode);
 
         util.create(zipcode, entityManager);
 

@@ -15,8 +15,8 @@ public class CarRentalsRecordsDao {
         this.util = new Util();
     }
 
-    public CarRentalsRecords createCarRentalsRecords(Car car, Costumer costumer, WithdrawalSpecifications withdrawalSpecifications){
-        CarRentalsRecords carRentalsRecords = new CarRentalsRecords(car, costumer, withdrawalSpecifications);
+    public CarRentalsRecords createCarRentalsRecords(Car car, Costumer costumer, CarWithdrawalSpecifications carWithdrawalSpecifications){
+        CarRentalsRecords carRentalsRecords = new CarRentalsRecords(car, costumer, carWithdrawalSpecifications);
 
         util.create(carRentalsRecords, entityManager);
 

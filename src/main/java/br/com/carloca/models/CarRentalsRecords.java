@@ -12,15 +12,15 @@ public class CarRentalsRecords {
     private Car car;
     @ManyToOne
     private Costumer costumer;
-    @ManyToOne
-    private WithdrawalSpecifications withdrawalSpecifications;
-    @ManyToOne
+    @OneToOne
+    private CarWithdrawalSpecifications carWithdrawalSpecifications;
+    @OneToOne
     private CarReturnSpecifications carReturnSpecifications;
 
-    public CarRentalsRecords(Car car, Costumer costumer, WithdrawalSpecifications withdrawalSpecifications) {
+    public CarRentalsRecords(Car car, Costumer costumer, CarWithdrawalSpecifications carWithdrawalSpecifications) {
         this.car = car;
         this.costumer = costumer;
-        this.withdrawalSpecifications = withdrawalSpecifications;
+        this.carWithdrawalSpecifications = carWithdrawalSpecifications;
     }
 
     public int getId() {
@@ -47,12 +47,12 @@ public class CarRentalsRecords {
         this.costumer = costumer;
     }
 
-    public WithdrawalSpecifications getWithdrawalSpecifications() {
-        return withdrawalSpecifications;
+    public CarWithdrawalSpecifications getWithdrawalSpecifications() {
+        return carWithdrawalSpecifications;
     }
 
-    public void setWithdrawalSpecifications(WithdrawalSpecifications withdrawalSpecifications) {
-        this.withdrawalSpecifications = withdrawalSpecifications;
+    public void setWithdrawalSpecifications(CarWithdrawalSpecifications carWithdrawalSpecifications) {
+        this.carWithdrawalSpecifications = carWithdrawalSpecifications;
     }
 
     public CarReturnSpecifications getReturnSpecifications() {

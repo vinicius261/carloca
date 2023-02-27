@@ -2,10 +2,11 @@ package br.com.carloca.dao;
 
 import br.com.carloca.factory.ManagerFactory;
 import br.com.carloca.models.FranchiseUnit;
-import br.com.carloca.models.WithdrawalSpecifications;
+import br.com.carloca.models.CarWithdrawalSpecifications;
 import br.com.carloca.util.Util;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class WithdrawalSpecificationsDao {
@@ -17,11 +18,11 @@ public class WithdrawalSpecificationsDao {
         this.util = new Util();
     }
 
-    public WithdrawalSpecifications createWithdrawalSpecifications(Date date, Double odometerRegistration, FranchiseUnit franchiseUnit){
-        WithdrawalSpecifications withdrawalSpecifications = new WithdrawalSpecifications(date, odometerRegistration, franchiseUnit);
+    public CarWithdrawalSpecifications createWithdrawalSpecifications(LocalDate date, Integer odometerRegistration, FranchiseUnit franchiseUnit){
+        CarWithdrawalSpecifications carWithdrawalSpecifications = new CarWithdrawalSpecifications(date, odometerRegistration, franchiseUnit);
 
-        util.create(withdrawalSpecifications, entityManager);
+        util.create(carWithdrawalSpecifications, entityManager);
 
-        return withdrawalSpecifications;
+        return carWithdrawalSpecifications;
     }
 }

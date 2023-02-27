@@ -16,8 +16,8 @@ public class ComplementDao {
         this.util = new Util();
     }
 
-    public Complement createComplement(){
-        Complement complement = new Complement();
+    public Complement createComplement(String inputComplement){
+        Complement complement = new Complement(inputComplement);
 
         util.create(complement, entityManager);
 

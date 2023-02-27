@@ -24,4 +24,13 @@ public class CostumerDao {
 
         return costumer;
     }
+
+    public Costumer retrieve(String document){
+        entityManager.getTransaction().begin();
+        Costumer costumer = entityManager.find(Costumer.class, document);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return costumer;
+    }
 }

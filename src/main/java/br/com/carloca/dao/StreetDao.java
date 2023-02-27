@@ -17,8 +17,8 @@ public class StreetDao {
         this.util = new Util();
     }
 
-    public Street createStreet(){
-        Street street = new Street();
+    public Street createStreet(String inputStreet){
+        Street street = new Street(inputStreet);
 
         util.create(street, entityManager);
 
