@@ -17,14 +17,14 @@ public class Car {
     @Column(name = "car_color")
     private CarColors carColor;
     @Column(name = "in_use")
-    private boolean inUSe;
+    private boolean inUse;
     private Integer odometer;
 
-    public Car(String licensePlate, CarVersion carVersion, CarColors carColor, boolean inUSe, Integer odometer) {
+    public Car(String licensePlate, CarVersion carVersion, CarColors carColor, boolean inUse, Integer odometer) {
         this.licensePlate = licensePlate;
         this.carVersion = carVersion;
         this.carColor = carColor;
-        this.inUSe = inUSe;
+        this.inUse = inUse;
         this.odometer = odometer;
     }
 
@@ -64,12 +64,12 @@ public class Car {
         this.carColor = carColor;
     }
 
-    public boolean isInUSe() {
-        return inUSe;
+    public boolean isInUse() {
+        return inUse;
     }
 
-    public void setInUSe(boolean inUSe) {
-        this.inUSe = inUSe;
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 
     public Integer getOdometer() {

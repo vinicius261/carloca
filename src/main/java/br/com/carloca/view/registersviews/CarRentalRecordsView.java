@@ -1,6 +1,6 @@
 package br.com.carloca.view.registersviews;
 
-import br.com.carloca.controller.NewCarRentalRecordsController;
+import br.com.carloca.controller.registerscontrollers.NewCarRentalRecordsController;
 
 import java.util.Scanner;
 

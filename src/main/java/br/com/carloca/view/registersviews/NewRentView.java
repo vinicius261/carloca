@@ -1,8 +1,9 @@
 package br.com.carloca.view.registersviews;
 
-import br.com.carloca.controller.NewRentController;
+import br.com.carloca.controller.registerscontrollers.NewRentController;
 import br.com.carloca.exceptions.CostumerIsUsinCarException;
 import br.com.carloca.exceptions.DateFormatException;
+import br.com.carloca.exceptions.NoAvailableCarsException;
 import br.com.carloca.models.Car;
 import br.com.carloca.models.CarWithdrawalSpecifications;
 import br.com.carloca.models.Costumer;
@@ -92,8 +93,17 @@ public class NewRentView {
     }
 
     private void showAvailableCars() {
-        List<Car> cars = controller.getAvailableCars();
-        cars.forEach(car -> System.out.println(car.getLicensePlate() + " - " +
-                car.getCarVersion().getName()+ " - " + car.getCarVersion().getName() ));
+        try {
+            List<Car> cars = controller.getAvailableCars();
+
+            cars.forEach(car -> System.out.println(car.getLicensePlate() + " - " +
+                    car.getCarVersion().getCarModel().getName() + " - " + car.getCarVersion().getName()));
+
+        }catch (NoAvailableCarsException ex){
+            System.out.println(ex.getMessage());
+
+            MainView mainView = new MainView();
+            mainView.showView();
+        }
     }
 }

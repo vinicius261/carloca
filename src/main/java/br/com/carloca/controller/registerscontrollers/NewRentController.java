@@ -1,8 +1,9 @@
-package br.com.carloca.controller;
+package br.com.carloca.controller.registerscontrollers;
 
 import br.com.carloca.dao.*;
 import br.com.carloca.exceptions.CostumerIsUsinCarException;
 import br.com.carloca.exceptions.DateFormatException;
+import br.com.carloca.exceptions.NoAvailableCarsException;
 import br.com.carloca.models.Car;
 import br.com.carloca.models.CarWithdrawalSpecifications;
 import br.com.carloca.models.Costumer;
@@ -67,14 +68,10 @@ public class NewRentController {
     }
 
     public List<Car> getAvailableCars() {
-        List<Car> availableCars = new ArrayList<>();
+        List<Car> availableCars = carDao.retrieveAvailableCars();
 
-        List<Car> cars = carDao.retrieveAll();
-
-        for (Car car: cars) {
-            if(car.isInUSe() == false){
-                availableCars.add(car);
-            }
+        if(availableCars.isEmpty()){
+            throw new NoAvailableCarsException("Não existem carros disponíveis no momento.");
         }
 
         return availableCars;

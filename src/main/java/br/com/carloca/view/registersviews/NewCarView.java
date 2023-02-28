@@ -1,6 +1,6 @@
 package br.com.carloca.view.registersviews;
 
-import br.com.carloca.controller.NewCarController;
+import br.com.carloca.controller.registerscontrollers.NewCarController;
 import br.com.carloca.enums.CarColors;
 import br.com.carloca.models.*;
 import br.com.carloca.util.Util;

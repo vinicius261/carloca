@@ -1,4 +1,4 @@
-package br.com.carloca.controller;
+package br.com.carloca.controller.registerscontrollers;
 
 import br.com.carloca.dao.*;
 import br.com.carloca.exceptions.DateFormatException;
@@ -38,7 +38,7 @@ public class ReturnCarController {
         CarReturnSpecifications carReturnSpecifications = carReturnSpecificationsDao.createCarReturnSpecificationsDao(date,odometer,franchiseUnit);
         carRentalsRecordsDao.registerReturn(costumer, carReturnSpecifications);
         costumerDao.updateInUseReturn(costumer);
-        carDao.updateInUseReturn(car);
+        carDao.updateCarAtributesInReturn(car,carReturnSpecifications.getOdometerRegistration());
         return carReturnSpecifications;
     }
 

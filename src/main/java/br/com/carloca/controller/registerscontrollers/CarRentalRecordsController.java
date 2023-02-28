@@ -1,4 +1,4 @@
-package br.com.carloca.controller;
+package br.com.carloca.controller.registerscontrollers;
 
 import br.com.carloca.util.Util;
 

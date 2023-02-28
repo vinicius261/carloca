@@ -4,7 +4,6 @@ import br.com.carloca.enums.CarColors;
 import br.com.carloca.factory.ManagerFactory;
 import br.com.carloca.models.Car;
 import br.com.carloca.models.CarVersion;
-import br.com.carloca.models.Costumer;
 import br.com.carloca.util.Util;
 
 import javax.persistence.EntityManager;
@@ -32,23 +31,38 @@ public class CarDao {
         Car carToUpdate = retrieve(car.getLicensePlate());
         entityManager.getTransaction().begin();
         entityManager.merge(carToUpdate);
-        carToUpdate.setInUSe(true);
+        carToUpdate.setInUse(true);
         entityManager.getTransaction().commit();
     }
 
-    public void updateInUseReturn(Car car){
+    public void updateCarAtributesInReturn(Car car, Integer newOdometer){
         Car carToUpdate = retrieve(car.getLicensePlate());
         entityManager.getTransaction().begin();
         entityManager.merge(carToUpdate);
-        carToUpdate.setInUSe(false);
+        carToUpdate.setInUse(false);
+        carToUpdate.setOdometer(newOdometer);
         entityManager.getTransaction().commit();
     }
 
     public List<Car> retrieveAll() {
+        if (entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().rollback();
+        }
         String jpql = "SELECT c FROM Car c";
 
         entityManager.getTransaction().begin();
         List<Car> cars = entityManager.createQuery(jpql).getResultList();
+        entityManager.getTransaction().commit();
+
+        return cars;
+    }
+
+    public List<Car> retrieveAvailableCars() {
+        entityManager.getTransaction().begin();
+        String jpql = "SELECT c FROM Car c WHERE c.inUse = :inUse";
+        List<Car> cars = entityManager.createQuery(jpql, Car.class)
+                .setParameter("inUse", false)
+                .getResultList();
         entityManager.getTransaction().commit();
 
         return cars;
