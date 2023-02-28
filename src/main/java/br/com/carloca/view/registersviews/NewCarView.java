@@ -4,6 +4,7 @@ import br.com.carloca.controller.NewCarController;
 import br.com.carloca.enums.CarColors;
 import br.com.carloca.models.*;
 import br.com.carloca.util.Util;
+import br.com.carloca.view.MainView;
 
 import java.util.Scanner;
 
@@ -35,12 +36,14 @@ public class NewCarView {
 
         System.out.println("Para as próximas perguntas digite 's' se carro tiver ou 'n' caso não tenha o opcional: ");
 
+        System.out.println("Tem ar condicionado?");
         boolean airConditioning = getOptionals(scanner.nextLine());
+        System.out.println("Tem ar direção hidráulica?");
         boolean hydraulicStreering = getOptionals(scanner.nextLine());
+        System.out.println("Tem ar airbag?");
         boolean airbag = getOptionals(scanner.nextLine());
 
-
-        CarVersion carVersion = new CarVersion(versionName, carModel, motorization,
+        CarVersion carVersion = controller.newCarVersion(versionName, carModel, motorization,
                 airConditioning, hydraulicStreering, airbag);
 
         System.out.println("Digite a placa do carro: ");
@@ -48,19 +51,21 @@ public class NewCarView {
 
         CarColors carColor = colorChoice();
 
-        System.out.println("Digite a kilometragem do carro: ");
-        Integer odometer = controller.getKm();
+        System.out.println("Digite a kilometragem do carro ou aperte qualquer tecla se for 0km: ");
+        Integer odometer = controller.getKm(scanner.nextLine());
 
-        Car car = new Car(licensePlate, carVersion, carColor, false, odometer);
-
-        controller.newCar(car);
+        controller.newCar(licensePlate, carVersion, carColor, odometer);
 
         System.out.println("Carro cadastrado com sucesso");
+        System.out.println("------------------------------------------------------------------------");
+
+        MainView mainView = new MainView();
+        mainView.showView();
     }
 
     public boolean getOptionals(String input){
         Util util = new Util();
-        return util.getBoolean(scanner.nextLine());
+        return util.getBoolean(input);
     }
     private String getMotorization() {
         System.out.println("Digite a motorização do carro: ");
@@ -76,19 +81,19 @@ public class NewCarView {
 
     private CarModel getCarModel(Brand brand, Category category) {
         System.out.println("Digite o modelo do carro: ");
-        CarModel carModel = new CarModel(scanner.nextLine(), category, brand);
+        CarModel carModel = controller.newCarmodel(scanner.nextLine(), category, brand);
         return carModel;
     }
 
     private Category getCategory() {
         System.out.println("Digite a categoria do carro: ");
-        Category category = new Category(scanner.nextLine());
+        Category category = controller.newCategory(scanner.nextLine());
         return category;
     }
 
     private Brand getBrand() {
         System.out.println("Digite a marca do carro: ");
-        Brand brand = new Brand(scanner.nextLine());
+        Brand brand = controller.newBrand(scanner.nextLine());
         return brand;
     }
 

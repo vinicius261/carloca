@@ -12,12 +12,12 @@ public class CarModel {
     @ManyToOne
     private Category category;
     @ManyToOne
-    private Brand Brand;
+    private Brand brand;
 
     public CarModel(String name, Category category, Brand brand) {
         this.name = name;
         this.category = category;
-        this.Brand = brand;
+        this.brand = brand;
     }
 
     public CarModel(){
@@ -49,10 +49,10 @@ public class CarModel {
     }
 
     public br.com.carloca.models.Brand getBrand() {
-        return Brand;
+        return brand;
     }
 
     public void setBrand(br.com.carloca.models.Brand brand) {
-        Brand = brand;
+        brand = brand;
     }
 }
