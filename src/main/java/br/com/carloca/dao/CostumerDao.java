@@ -2,6 +2,7 @@ package br.com.carloca.dao;
 
 import br.com.carloca.factory.ManagerFactory;
 import br.com.carloca.models.Address;
+import br.com.carloca.models.CarRentalsRecords;
 import br.com.carloca.models.Complement;
 import br.com.carloca.models.Costumer;
 import br.com.carloca.util.Util;
@@ -34,5 +35,21 @@ public class CostumerDao {
         entityManager.getTransaction().commit();
 
         return costumer;
+    }
+
+    public void updateInUseRent(Costumer costumer) {
+        Costumer costumerToUpdate = retrieve(costumer.getDocument());
+        entityManager.getTransaction().begin();
+        entityManager.merge(costumerToUpdate);
+        costumerToUpdate.setUsingCar(true);
+        entityManager.getTransaction().commit();
+    }
+
+    public void updateInUseReturn(Costumer costumer) {
+        Costumer costumerToUpdate = retrieve(costumer.getDocument());
+        entityManager.getTransaction().begin();
+        entityManager.merge(costumerToUpdate);
+        costumerToUpdate.setUsingCar(false);
+        entityManager.getTransaction().commit();
     }
 }

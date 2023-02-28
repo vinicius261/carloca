@@ -28,6 +28,22 @@ public class CarDao {
         return car;
     }
 
+    public void updateInUseRent(Car car){
+        Car carToUpdate = retrieve(car.getLicensePlate());
+        entityManager.getTransaction().begin();
+        entityManager.merge(carToUpdate);
+        carToUpdate.setInUSe(true);
+        entityManager.getTransaction().commit();
+    }
+
+    public void updateInUseReturn(Car car){
+        Car carToUpdate = retrieve(car.getLicensePlate());
+        entityManager.getTransaction().begin();
+        entityManager.merge(carToUpdate);
+        carToUpdate.setInUSe(false);
+        entityManager.getTransaction().commit();
+    }
+
     public List<Car> retrieveAll() {
         String jpql = "SELECT c FROM Car c";
 

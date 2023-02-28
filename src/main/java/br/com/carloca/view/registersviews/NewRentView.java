@@ -1,6 +1,7 @@
 package br.com.carloca.view.registersviews;
 
 import br.com.carloca.controller.NewRentController;
+import br.com.carloca.exceptions.CostumerIsUsinCarException;
 import br.com.carloca.exceptions.DateFormatException;
 import br.com.carloca.models.Car;
 import br.com.carloca.models.CarWithdrawalSpecifications;
@@ -29,18 +30,24 @@ public class NewRentView {
     }
 
     private void newRent(String document) {
-        Costumer costumer = controller.getCostumer(document);
+        try {
+            Costumer costumer = controller.getCostumer(document);
+            Car car = getAvailableCar();
 
-        Car car = getAvailableCar();
+            CarWithdrawalSpecifications withdrawalSpecifications = getWithdrawalSpecifications(car.getOdometer());
 
-        CarWithdrawalSpecifications withdrawalSpecifications = getWithdrawalSpecifications(car.getOdometer());
+            controller.newRent(car, costumer, withdrawalSpecifications);
 
-        controller.newRent(car, costumer, withdrawalSpecifications);
+            System.out.println("Aluguel registrado com sucesso.\n\n");
+            System.out.println("------------------------------------------------------------------------");
+            MainView mainView = new MainView();
+            mainView.showView();
 
-        System.out.println("Aluguel registrado com sucesso.\n\n");
-        System.out.println("------------------------------------------------------------------------");
-        MainView mainView = new MainView();
-        mainView.showView();
+        }catch (CostumerIsUsinCarException ex) {
+            System.out.println(ex.getMessage());
+            CarRentalRecordsView carRentalRecordsView = new CarRentalRecordsView();
+            carRentalRecordsView.showView();
+        }
     }
 
     private Car getAvailableCar() {

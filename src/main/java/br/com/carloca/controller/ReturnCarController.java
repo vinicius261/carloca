@@ -1,9 +1,6 @@
 package br.com.carloca.controller;
 
-import br.com.carloca.dao.CarRentalsRecordsDao;
-import br.com.carloca.dao.CarReturnSpecificationsDao;
-import br.com.carloca.dao.CostumerDao;
-import br.com.carloca.dao.FranchiseUnitDao;
+import br.com.carloca.dao.*;
 import br.com.carloca.exceptions.DateFormatException;
 import br.com.carloca.models.*;
 
@@ -15,12 +12,14 @@ public class ReturnCarController {
     private CarReturnSpecificationsDao carReturnSpecificationsDao;
     private CostumerDao costumerDao;
     private CarRentalsRecordsDao carRentalsRecordsDao;
+    private CarDao carDao;
 
     public ReturnCarController(){
         this.franchiseUnitDao = new FranchiseUnitDao();
         this.carReturnSpecificationsDao = new CarReturnSpecificationsDao();
         this.costumerDao = new CostumerDao();
         this.carRentalsRecordsDao = new CarRentalsRecordsDao();
+        this.carDao =new CarDao();
     }
 
     public LocalDate getDate(String input) {
@@ -35,9 +34,11 @@ public class ReturnCarController {
         return date;
     }
 
-    public CarReturnSpecifications newReturn(LocalDate date, Integer odometer, FranchiseUnit franchiseUnit, Costumer costumer) {
+    public CarReturnSpecifications newReturn(LocalDate date, Integer odometer, FranchiseUnit franchiseUnit, Costumer costumer, Car car) {
         CarReturnSpecifications carReturnSpecifications = carReturnSpecificationsDao.createCarReturnSpecificationsDao(date,odometer,franchiseUnit);
         carRentalsRecordsDao.registerReturn(costumer, carReturnSpecifications);
+        costumerDao.updateInUseReturn(costumer);
+        carDao.updateInUseReturn(car);
         return carReturnSpecifications;
     }
 

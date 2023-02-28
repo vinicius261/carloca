@@ -36,7 +36,7 @@ public class ReturnCarView {
 
         FranchiseUnit franchiseUnit = getFranchiseUnit();
 
-        controller.newReturn(date, odometer, franchiseUnit, costumer);
+        controller.newReturn(date, odometer, franchiseUnit, costumer, carRentalsRecords.getCar());
 
         System.out.println("Devolução registrada com sucesso.\n\n");
         System.out.println("------------------------------------------------------------------------");

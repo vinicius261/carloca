@@ -1,6 +1,7 @@
 package br.com.carloca.controller;
 
 import br.com.carloca.dao.*;
+import br.com.carloca.exceptions.CostumerIsUsinCarException;
 import br.com.carloca.exceptions.DateFormatException;
 import br.com.carloca.models.Car;
 import br.com.carloca.models.CarWithdrawalSpecifications;
@@ -27,11 +28,18 @@ public class NewRentController {
     }
 
     public Costumer getCostumer(String document) {
-        return costumerDao.retrieve(document);
+        Costumer costumer =  costumerDao.retrieve(document);
+        if(costumer.isUsingCar() == false) {
+            return costumer;
+        }else {
+        throw new CostumerIsUsinCarException("Esse cliente já está alugando um carro.");
+        }
     }
 
     public void newRent(Car car, Costumer costumer, CarWithdrawalSpecifications withdrawalSpecifications) {
         carRentalsRecordsDao.createCarRentalsRecords(car, costumer, withdrawalSpecifications);
+        costumerDao.updateInUseRent(costumer);
+        carDao.updateInUseRent(car);
     }
 
     public Car getAvailableCar(String licensePlate) {

@@ -1,4 +1,4 @@
-package br.com.carloca.tests;
+package br.com.carloca;
 
 import br.com.carloca.dao.*;
 import br.com.carloca.enums.CarColors;
