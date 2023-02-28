@@ -14,6 +14,8 @@ public class Complement {
         this.complement = complement;
     }
 
+    public Complement(){}
+
     public String getComplement() {
         return complement;
     }

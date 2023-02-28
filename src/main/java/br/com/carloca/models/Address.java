@@ -21,6 +21,10 @@ public class Address {
         this.complement = complement;
     }
 
+    public Address(){
+
+    }
+
     public int getId() {
         return id;
     }

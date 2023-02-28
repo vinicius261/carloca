@@ -28,6 +28,10 @@ public class Car {
         this.odometer = odometer;
     }
 
+    public Car(){
+
+    }
+
     public int getId() {
         return id;
     }

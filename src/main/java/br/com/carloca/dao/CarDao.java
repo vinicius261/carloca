@@ -34,16 +34,17 @@ public class CarDao {
         entityManager.getTransaction().begin();
         List<Car> cars = entityManager.createQuery(jpql).getResultList();
         entityManager.getTransaction().commit();
-        entityManager.close();
 
         return cars;
     }
 
     public Car retrieve(String licensePlate) {
         entityManager.getTransaction().begin();
-        Car car = entityManager.find(Car.class, licensePlate);
+        String jpql = "SELECT c FROM Car c WHERE c.licensePlate = :licensePlate";
+        Car car = entityManager.createQuery(jpql, Car.class)
+                .setParameter("licensePlate", licensePlate)
+                .getSingleResult();
         entityManager.getTransaction().commit();
-        entityManager.close();
 
         return car;
     }

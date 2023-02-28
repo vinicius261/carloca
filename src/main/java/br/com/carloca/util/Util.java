@@ -11,7 +11,6 @@ public class Util {
         entityManager.getTransaction().begin();
         entityManager.persist(object);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public int getMenuOption(String input){

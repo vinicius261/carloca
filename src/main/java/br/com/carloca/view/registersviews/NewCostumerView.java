@@ -1,4 +1,4 @@
-package br.com.carloca.view;
+package br.com.carloca.view.registersviews;
 
 import br.com.carloca.controller.NewCostumerController;
 import br.com.carloca.models.Costumer;

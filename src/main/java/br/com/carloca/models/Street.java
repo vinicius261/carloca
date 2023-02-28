@@ -22,6 +22,8 @@ public class Street {
         this.street = street;
     }
 
+    public Street(){}
+
     public int getId() {
         return id;
     }

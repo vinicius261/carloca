@@ -22,6 +22,8 @@ public class CarWithdrawalSpecifications {
         this.franchiseUnit = franchiseUnit;
     }
 
+    public CarWithdrawalSpecifications(){}
+
     public int getId() {
         return id;
     }

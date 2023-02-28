@@ -28,6 +28,10 @@ public class CarVersion {
         this.airbag = airbag;
     }
 
+    public CarVersion(){
+
+    }
+
     public int getId() {
         return id;
     }

@@ -22,4 +22,23 @@ public class CarRentalsRecordsDao {
 
         return carRentalsRecords;
     }
+
+    public CarRentalsRecords retrieve(Costumer costumer) {
+        entityManager.getTransaction().begin();
+        String jpql = "SELECT c FROM CarRentalsRecords c WHERE c.costumer = :costumer";
+        CarRentalsRecords carRentalsRecords = entityManager.createQuery(jpql, CarRentalsRecords.class)
+                .setParameter("costumer", costumer)
+                .getSingleResult();
+        entityManager.getTransaction().commit();
+
+        return carRentalsRecords;
+    }
+
+    public void registerReturn(Costumer costumer, CarReturnSpecifications carReturnSpecifications) {
+        CarRentalsRecords records = retrieve(costumer);
+        entityManager.getTransaction().begin();
+        entityManager.merge(records);
+        records.setReturnSpecifications(carReturnSpecifications);
+        entityManager.getTransaction().commit();
+    }
 }

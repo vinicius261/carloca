@@ -10,7 +10,7 @@ public class Tests {
 
     public static void main(String[] args) {
 
-        StreetDao streetDao = new StreetDao();
+        /*StreetDao streetDao = new StreetDao();
         Street street = streetDao.createStreet();
 
         ZipcodeDao zipcodeDao = new ZipcodeDao();
@@ -49,7 +49,7 @@ public class Tests {
 
         CarRentalsRecordsDao carRentalsRecordsDao = new CarRentalsRecordsDao();
         CarRentalsRecords carRentalsRecords = carRentalsRecordsDao.createCarRentalsRecords(car, costumer, carWithdrawalSpecifications);
-
+*/
 
     }
 }

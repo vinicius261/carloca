@@ -1,6 +1,8 @@
 package br.com.carloca.view;
 
 import br.com.carloca.controller.MainController;
+import br.com.carloca.view.dataquerysviews.DataQueryView;
+import br.com.carloca.view.registersviews.NewRecordsView;
 
 import java.util.Scanner;
 

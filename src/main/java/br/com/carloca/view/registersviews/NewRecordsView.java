@@ -1,6 +1,7 @@
-package br.com.carloca.view;
+package br.com.carloca.view.registersviews;
 
 import br.com.carloca.controller.CarRentalRecordsController;
+import br.com.carloca.view.MainView;
 
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class NewRecordsView {
     }
 
     private void showMenu() {
-        System.out.println("\n\nDigite o número da opção desejada: \n\n1 - Novo aluguel\n2 - Novo carro" +
+        System.out.println("\n\nDigite o número da opção desejada: \n\n1 - Aluguel ou Devolução\n2 - Novo carro" +
                 "\n\nOu qualquer tecla para voltar ao menu anterior.");
         System.out.println("------------------------------------------------------------------------");
 

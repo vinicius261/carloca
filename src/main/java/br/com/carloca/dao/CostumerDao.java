@@ -27,9 +27,11 @@ public class CostumerDao {
 
     public Costumer retrieve(String document){
         entityManager.getTransaction().begin();
-        Costumer costumer = entityManager.find(Costumer.class, document);
+        String jpql = "SELECT c FROM Costumer c WHERE c.document = :document";
+        Costumer costumer = entityManager.createQuery(jpql, Costumer.class)
+                .setParameter("document", document)
+                .getSingleResult();
         entityManager.getTransaction().commit();
-        entityManager.close();
 
         return costumer;
     }

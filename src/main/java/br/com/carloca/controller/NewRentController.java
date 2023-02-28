@@ -54,7 +54,7 @@ public class NewRentController {
         return withdrawalSpecificationsDao.createWithdrawalSpecifications(date,odometer,franchiseUnit);
     }
 
-    public FranchiseUnit getFranchiseUnit(String id) {
+    public FranchiseUnit getFranchiseUnit(int id) {
         return franchiseUnitDao.retrieve(id);
     }
 

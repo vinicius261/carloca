@@ -5,6 +5,8 @@ import br.com.carloca.models.*;
 import br.com.carloca.util.Util;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CarReturnSpecificationsDao {
@@ -16,7 +18,7 @@ public class CarReturnSpecificationsDao {
         this.util = new Util();
     }
 
-    public CarReturnSpecifications createCarReturnSpecificationsDao(Date date, Double odometerRegistration, FranchiseUnit franchiseUnit){
+    public CarReturnSpecifications createCarReturnSpecificationsDao(LocalDate date, Integer odometerRegistration, FranchiseUnit franchiseUnit){
         CarReturnSpecifications carReturnSpecifications = new CarReturnSpecifications(date, odometerRegistration, franchiseUnit);
 
         util.create(carReturnSpecifications, entityManager);

@@ -18,6 +18,8 @@ public class FranchiseUnit {
         this.address = address;
     }
 
+    public FranchiseUnit(){}
+
     public int getId() {
         return id;
     }

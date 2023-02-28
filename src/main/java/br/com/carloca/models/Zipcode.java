@@ -14,6 +14,8 @@ public class Zipcode {
         this.zipcode = zipcode;
     }
 
+    public Zipcode(){}
+
     public String getZipcode() {
         return zipcode;
     }

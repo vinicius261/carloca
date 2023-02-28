@@ -1,4 +1,4 @@
-package br.com.carloca.view;
+package br.com.carloca.view.registersviews;
 
 import br.com.carloca.controller.NewCarRentalRecordsController;
 
@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class CarRentalRecordsView {
     private NewCarRentalRecordsController controller;
     private Scanner scanner;
+
+    public CarRentalRecordsView(){
+        this.controller = new NewCarRentalRecordsController();
+        this.scanner = new Scanner(System.in);
+    }
     public void showView(){
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                   LOCAÇÃO");
@@ -31,8 +36,8 @@ public class CarRentalRecordsView {
             newRentView.showView(scanner.nextLine());
         }else if (menuOption == 3) {
             System.out.println("\nDigite o documento do cliente: ");
-            ReturCarView returCarView = new ReturCarView();
-            returCarView.showView(scanner.nextLine());
+            ReturnCarView returnCarView = new ReturnCarView();
+            returnCarView.showView(scanner.nextLine());
 
         }else {
             System.out.println("Escolha um número válido.\n");

@@ -20,6 +20,10 @@ public class CarModel {
         this.Brand = brand;
     }
 
+    public CarModel(){
+
+    }
+
     public int getId() {
         return id;
     }

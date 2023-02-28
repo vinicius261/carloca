@@ -1,4 +1,4 @@
-package br.com.carloca.view;
+package br.com.carloca.view.registersviews;
 
 import br.com.carloca.controller.NewRentController;
 import br.com.carloca.exceptions.DateFormatException;
@@ -6,6 +6,7 @@ import br.com.carloca.models.Car;
 import br.com.carloca.models.CarWithdrawalSpecifications;
 import br.com.carloca.models.Costumer;
 import br.com.carloca.models.FranchiseUnit;
+import br.com.carloca.view.MainView;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -74,7 +75,7 @@ public class NewRentView {
     private FranchiseUnit getFranchiseUnit() {
         showFranchiseUnits();
         System.out.println("\nInsira o número da unidade em que o carro será retirado: ");
-        return controller.getFranchiseUnit(scanner.nextLine());
+        return controller.getFranchiseUnit(scanner.nextInt());
     }
 
     private void showFranchiseUnits() {
@@ -86,6 +87,6 @@ public class NewRentView {
     private void showAvailableCars() {
         List<Car> cars = controller.getAvailableCars();
         cars.forEach(car -> System.out.println(car.getLicensePlate() + " - " +
-                car.getCarVersion().getName()+ " - " + car.getCarVersion() ));
+                car.getCarVersion().getName()+ " - " + car.getCarVersion().getName() ));
     }
 }

@@ -2,7 +2,6 @@ package br.com.carloca.controller;
 
 import br.com.carloca.dao.*;
 import br.com.carloca.models.*;
-import br.com.carloca.view.NewCostumerView;
 
 public class NewCostumerController {
     private CostumerDao costumerDao;
@@ -24,9 +23,9 @@ public class NewCostumerController {
         Street street = streetDao.createStreet(inputStreet);
         Zipcode zipcode = zipcodeDao.createZipcode(inputZipcode);
         Address address = addressDao.createAddress(zipcode,street,complement);
-        Costumer costumer = costumerDao.createCostumer(name, document,address);
+        Costumer costumer = costumerDao.createCostumer(document, name,address);
 
-        return new Costumer(name, document,address);
+        return new Costumer(document, name,address);
     }
 
 }

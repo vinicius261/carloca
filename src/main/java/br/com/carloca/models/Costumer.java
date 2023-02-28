@@ -22,6 +22,8 @@ public class Costumer {
         this.address = address;
     }
 
+    public Costumer(){}
+
     public int getId() {
         return id;
     }

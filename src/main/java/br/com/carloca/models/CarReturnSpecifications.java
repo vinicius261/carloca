@@ -1,6 +1,7 @@
 package br.com.carloca.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -9,16 +10,19 @@ public class CarReturnSpecifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date date;
+    private LocalDate date;
     @Column(name = "odometer_registration")
-    private Double odometerRegistration;
+    private Integer odometerRegistration;
     @ManyToOne
     private FranchiseUnit franchiseUnit;
 
-    public CarReturnSpecifications(Date date, Double odometerRegistration, FranchiseUnit franchiseUnit) {
+    public CarReturnSpecifications(LocalDate date, Integer odometerRegistration, FranchiseUnit franchiseUnit) {
         this.date = date;
         this.odometerRegistration = odometerRegistration;
         this.franchiseUnit = franchiseUnit;
+    }
+    public CarReturnSpecifications(){
+
     }
 
     public int getId() {
@@ -29,19 +33,19 @@ public class CarReturnSpecifications {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Double getOdometerRegistration() {
+    public Integer getOdometerRegistration() {
         return odometerRegistration;
     }
 
-    public void setOdometerRegistration(Double odometerRegistration) {
+    public void setOdometerRegistration(Integer odometerRegistration) {
         this.odometerRegistration = odometerRegistration;
     }
 

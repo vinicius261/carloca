@@ -22,6 +22,9 @@ public class CarRentalsRecords {
         this.costumer = costumer;
         this.carWithdrawalSpecifications = carWithdrawalSpecifications;
     }
+    public CarRentalsRecords(){
+
+    }
 
     public int getId() {
         return id;

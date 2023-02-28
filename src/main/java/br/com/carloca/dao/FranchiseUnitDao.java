@@ -27,7 +27,7 @@ public class FranchiseUnitDao {
         return franchiseUnit;
     }
 
-    public FranchiseUnit retrieve(String id) {
+    public FranchiseUnit retrieve(int id) {
         entityManager.getTransaction().begin();
         FranchiseUnit franchiseUnit = entityManager.find(FranchiseUnit.class, id);
         entityManager.getTransaction().commit();
@@ -42,7 +42,6 @@ public class FranchiseUnitDao {
         entityManager.getTransaction().begin();
         List<FranchiseUnit> franchiseUnits = entityManager.createQuery(jpql).getResultList();
         entityManager.getTransaction().commit();
-        entityManager.close();
 
         return franchiseUnits;
     }
