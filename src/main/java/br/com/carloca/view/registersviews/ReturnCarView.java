@@ -1,10 +1,12 @@
 package br.com.carloca.view.registersviews;
 
 import br.com.carloca.controller.registerscontrollers.ReturnCarController;
+import br.com.carloca.exceptions.CostumerNotUsingCarException;
 import br.com.carloca.exceptions.DateFormatException;
 import br.com.carloca.models.*;
 import br.com.carloca.view.MainView;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -26,22 +28,28 @@ public class ReturnCarView {
     }
 
     private void newReturn(String document) {
-        Costumer costumer = controller.getCostumer(document);
+        try{
+            Costumer costumer = controller.getCostumer(document);
 
-        CarRentalsRecords carRentalsRecords = getCurrentRent(costumer);
+            CarRentalsRecords carRentalsRecords = getCurrentRent(costumer);
 
-        LocalDate date = getDate();
+            LocalDate date = LocalDate.now();
 
-        Integer odometer = getOdometer();
+            Integer odometer = getOdometer();
 
-        FranchiseUnit franchiseUnit = getFranchiseUnit();
+            FranchiseUnit franchiseUnit = getFranchiseUnit();
 
-        controller.newReturn(date, odometer, franchiseUnit, costumer, carRentalsRecords.getCar());
+            controller.newReturn(date, odometer, franchiseUnit, costumer, carRentalsRecords.getCar());
 
-        System.out.println("Devolução registrada com sucesso.\n\n");
-        System.out.println("------------------------------------------------------------------------");
-        MainView mainView = new MainView();
-        mainView.showView();
+            System.out.println("Devolução registrada com sucesso.\n\n");
+            System.out.println("------------------------------------------------------------------------");
+            MainView mainView = new MainView();
+            mainView.showView();
+        }catch (CostumerNotUsingCarException ex){
+            System.out.println(ex.getMessage());
+            NewRecordsView newRecordsView =  new NewRecordsView();
+            newRecordsView.showView();
+        }
     }
 
     private Integer getOdometer() {
@@ -50,20 +58,14 @@ public class ReturnCarView {
     }
 
     private CarRentalsRecords getCurrentRent(Costumer costumer) {
-        return controller.getCurrentRent(costumer);
-    }
-
-    public LocalDate getDate(){
-        LocalDate date;
-
-        System.out.println("Insira a data de retirada no formato AAAA-MM-DD: ");
         try {
-            date = controller.getDate(scanner.nextLine());
-        }catch (DateFormatException ex){
-            System.out.println(ex.getMessage());
-            date = getDate();
+            controller.getCurrentRent(costumer);
+        }catch (NoResultException ex){
+            System.out.println("Cliente não está alugando carros.");
+            NewRecordsView newRecordsView = new NewRecordsView();
+            newRecordsView.showView();
         }
-        return date;
+        return controller.getCurrentRent(costumer);
     }
 
     private FranchiseUnit getFranchiseUnit() {

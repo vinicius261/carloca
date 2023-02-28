@@ -7,6 +7,7 @@ import br.com.carloca.models.CarVersion;
 import br.com.carloca.util.Util;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class CarDao {
@@ -69,12 +70,17 @@ public class CarDao {
     }
 
     public Car retrieve(String licensePlate) {
-        entityManager.getTransaction().begin();
-        String jpql = "SELECT c FROM Car c WHERE c.licensePlate = :licensePlate";
-        Car car = entityManager.createQuery(jpql, Car.class)
-                .setParameter("licensePlate", licensePlate)
-                .getSingleResult();
-        entityManager.getTransaction().commit();
+        Car car;
+        try {
+            entityManager.getTransaction().begin();
+            String jpql = "SELECT c FROM Car c WHERE c.licensePlate = :licensePlate";
+            car = entityManager.createQuery(jpql, Car.class)
+                    .setParameter("licensePlate", licensePlate)
+                    .getSingleResult();
+            entityManager.getTransaction().commit();
+        }catch (NoResultException ex){
+            throw new NoResultException();
+        }
 
         return car;
     }

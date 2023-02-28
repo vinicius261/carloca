@@ -8,6 +8,7 @@ import br.com.carloca.models.Costumer;
 import br.com.carloca.util.Util;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 public class CostumerDao {
     private EntityManager entityManager;
@@ -27,12 +28,17 @@ public class CostumerDao {
     }
 
     public Costumer retrieve(String document){
-        entityManager.getTransaction().begin();
-        String jpql = "SELECT c FROM Costumer c WHERE c.document = :document";
-        Costumer costumer = entityManager.createQuery(jpql, Costumer.class)
-                .setParameter("document", document)
-                .getSingleResult();
-        entityManager.getTransaction().commit();
+        Costumer costumer = null;
+        try {
+            entityManager.getTransaction().begin();
+            String jpql = "SELECT c FROM Costumer c WHERE c.document = :document";
+            costumer = entityManager.createQuery(jpql, Costumer.class)
+                    .setParameter("document", document)
+                    .getSingleResult();
+            entityManager.getTransaction().commit();
+        }catch (NoResultException ex){
+            return costumer;
+        }
 
         return costumer;
     }

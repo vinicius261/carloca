@@ -1,9 +1,11 @@
 package br.com.carloca.controller.registerscontrollers;
 
 import br.com.carloca.dao.*;
+import br.com.carloca.exceptions.CostumerNotUsingCarException;
 import br.com.carloca.exceptions.DateFormatException;
 import br.com.carloca.models.*;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,10 +49,19 @@ public class ReturnCarController {
     }
 
     public Costumer getCostumer(String document) {
-        return costumerDao.retrieve(document);
+        Costumer costumer = costumerDao.retrieve(document);
+        if (!costumer.isUsingCar()) {
+            throw new CostumerNotUsingCarException("Esse cliente não está alugando nenhum carro");
+        }
+        return costumer;
     }
 
     public CarRentalsRecords getCurrentRent(Costumer costumer) {
+        try{
+            carRentalsRecordsDao.retrieve(costumer);
+        }catch (NoResultException ex){
+            throw new NoResultException();
+        }
         return carRentalsRecordsDao.retrieve(costumer);
     }
 

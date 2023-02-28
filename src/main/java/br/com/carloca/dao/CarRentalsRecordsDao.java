@@ -5,6 +5,7 @@ import br.com.carloca.models.*;
 import br.com.carloca.util.Util;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class CarRentalsRecordsDao {
@@ -25,13 +26,17 @@ public class CarRentalsRecordsDao {
     }
 
     public CarRentalsRecords retrieve(Costumer costumer) {
-        entityManager.getTransaction().begin();
-        String jpql = "SELECT c FROM CarRentalsRecords c WHERE c.costumer = :costumer";
-        CarRentalsRecords carRentalsRecords = entityManager.createQuery(jpql, CarRentalsRecords.class)
-                .setParameter("costumer", costumer)
-                .getSingleResult();
-        entityManager.getTransaction().commit();
-
+        CarRentalsRecords carRentalsRecords;
+        try {
+            entityManager.getTransaction().begin();
+            String jpql = "SELECT c FROM CarRentalsRecords c WHERE c.costumer = :costumer";
+            carRentalsRecords = entityManager.createQuery(jpql, CarRentalsRecords.class)
+                    .setParameter("costumer", costumer)
+                    .getSingleResult();
+            entityManager.getTransaction().commit();
+        }catch (NoResultException ex){
+            throw  new NoResultException();
+        }
         return carRentalsRecords;
     }
 

@@ -58,7 +58,11 @@ public class DataQueryView {
 
             System.out.println("Digite a placa do carro que deseja consultar: ");
             licensePlate = scanner.nextLine();
-            wantedCar = controller.getCar(licensePlate);
+            try {
+                wantedCar = controller.getCar(licensePlate);
+            }catch (NoResultException ex){
+                wantedCar = null;
+            }
         }
 
         showCarData(wantedCar);

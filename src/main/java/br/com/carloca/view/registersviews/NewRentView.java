@@ -1,9 +1,8 @@
 package br.com.carloca.view.registersviews;
 
+import br.com.carloca.controller.registerscontrollers.NewFranchiseController;
 import br.com.carloca.controller.registerscontrollers.NewRentController;
-import br.com.carloca.exceptions.CostumerIsUsinCarException;
-import br.com.carloca.exceptions.DateFormatException;
-import br.com.carloca.exceptions.NoAvailableCarsException;
+import br.com.carloca.exceptions.*;
 import br.com.carloca.models.Car;
 import br.com.carloca.models.CarWithdrawalSpecifications;
 import br.com.carloca.models.Costumer;
@@ -44,7 +43,7 @@ public class NewRentView {
             MainView mainView = new MainView();
             mainView.showView();
 
-        }catch (CostumerIsUsinCarException ex) {
+        }catch (CostumerIsUsinCarException | CostumerNotFoundException ex) {
             System.out.println(ex.getMessage());
             CarRentalRecordsView carRentalRecordsView = new CarRentalRecordsView();
             carRentalRecordsView.showView();
@@ -60,36 +59,33 @@ public class NewRentView {
     }
 
     private CarWithdrawalSpecifications getWithdrawalSpecifications(Integer odometer) {
-        LocalDate date = getDate();
+        LocalDate date = LocalDate.now();
 
         FranchiseUnit franchiseUnit = getFranchiseUnit();
 
         return controller.newWithdrawalSpecifications(date, odometer, franchiseUnit);
     }
 
-    public LocalDate getDate(){
-        LocalDate date;
-
-        System.out.println("Insira a data de retirada no formato AAAA-MM-DD: ");
-        try {
-            date = controller.getDate(scanner.nextLine());
-        }catch (DateFormatException ex){
-            System.out.println(ex.getMessage());
-            date = getDate();
-        }
-        return date;
-    }
-
     private FranchiseUnit getFranchiseUnit() {
-        showFranchiseUnits();
-        System.out.println("\nInsira o número da unidade em que o carro será retirado: ");
-        return controller.getFranchiseUnit(scanner.nextInt());
+        try{
+            showFranchiseUnits();
+            System.out.println("\nInsira o número da unidade em que o carro será retirado: ");
+            return controller.getFranchiseUnit(scanner.nextInt());
+        }catch (NoFranchiseException ex){
+            NewFranchiseController franchiseController =  new NewFranchiseController();
+            return franchiseController.createFranchise();
+        }
     }
 
     private void showFranchiseUnits() {
-        List<FranchiseUnit> franchiseUnits = controller.showFranchiseUnits();
-        franchiseUnits.forEach(franchiseUnit -> System.out.println(franchiseUnit.getId() +
-                " - " + franchiseUnit.getName()));
+        try{
+            List<FranchiseUnit> franchiseUnits = controller.showFranchiseUnits();
+            franchiseUnits.forEach(franchiseUnit -> System.out.println(franchiseUnit.getId() +
+                    " - " + franchiseUnit.getName()));
+        }catch (NoFranchiseException ex){
+            throw  new NoFranchiseException();
+        }
+
     }
 
     private void showAvailableCars() {

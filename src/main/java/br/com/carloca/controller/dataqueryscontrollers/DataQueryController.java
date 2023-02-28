@@ -9,6 +9,7 @@ import br.com.carloca.models.CarWithdrawalSpecifications;
 import br.com.carloca.models.Costumer;
 import br.com.carloca.util.Util;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,6 +48,12 @@ public class DataQueryController {
     }
 
     public Car getCar(String licensePlate) {
-        return carDao.retrieve(licensePlate);
+        Car car;
+        try{
+            car = carDao.retrieve(licensePlate);
+        }catch (NoResultException ex){
+            throw new NoResultException();
+        }
+        return car;
     }
 }
